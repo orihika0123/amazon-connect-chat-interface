@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { config } from "./utils/log";
 
+import request from './utils/fetchRequest';
 import defaultTheme from './theme/defaultTheme';
 
 (function (connect) {
@@ -26,6 +27,7 @@ import defaultTheme from './theme/defaultTheme';
       }
     };
     connect.ChatSession.setGlobalConfig(config);
+    request('/v1/api/init')
     ReactDOM.render(
       <BrowserRouter><App {...props}/></BrowserRouter>, document.getElementById(containerId) || document.getElementById("root"));
   };
@@ -35,6 +37,7 @@ import defaultTheme from './theme/defaultTheme';
   };
 
 
+  request('/v1/api/beforeLoad')
 
   window.connect = connect;
 }(window.connect || {}));
